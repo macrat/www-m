@@ -1,0 +1,12 @@
+. {
+	template ANY A {
+		match "^(www\.|m\.)+(?P<addr>.+)$"
+		answer "{{ .Name }} 60 IN CNAME {{ .Group.addr }}"
+		fallthrough
+	}
+
+	proxy . 8.8.8.8
+
+	errors
+	log
+}
